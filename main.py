@@ -11,7 +11,7 @@ def main():
 
     for d in char_list_sorted:
         if d["letter"].isalpha():
-            print(f"The {d["letter"]} character was found {d["count"]} times")
+            print(f"The '{d["letter"]}' character was found {d["count"]} times")
     
     print("--- End report ---")
 
