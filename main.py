@@ -1,17 +1,24 @@
+from stats import word_count
+import sys
+
 def main():
-    book_path = "books/frankenstein.txt"
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+
+    book_path = sys.argv[1]
     book = get_book_text(book_path)
     num_words = word_count(book)
     char_d = get_chars_dict(book)
     char_list_sorted = d_to_sorted_list(char_d)
     
     print(f"--- Begin report of {book_path}")
-    print(f"{num_words} words found in the document")
+    print(f"Found {num_words} total words in the document")
     print()
 
     for d in char_list_sorted:
         if d["letter"].isalpha():
-            print(f"The '{d["letter"]}' character was found {d["count"]} times")
+            print(f"- '{d["letter"]}: {d["count"]}'")
     
     print("--- End report ---")
 
@@ -25,10 +32,6 @@ def d_to_sorted_list(char_d):
     list_of_letters.sort(key=lambda x: x.get("count"), reverse=True)
     return list_of_letters
 
-    
-def word_count(text):
-    word_count = len(text.split())
-    return word_count
 
 def get_chars_dict(text):
     lowercase_file = text.lower()
